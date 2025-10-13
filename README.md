@@ -1,4 +1,4 @@
-# Uploading temperature sensor data in Thing Speak cloud
+# EXP 3:Uploading temperature sensor data in Thing Speak cloud
 
 # AIM:
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
@@ -71,10 +71,77 @@ Automatically act on your data and communicate using third-party services like T
 
 
 # PROGRAM:
+#include "ThingSpeak.h"
+#include <WiFi.h>
+#include "DHT.h"
+char ssid[]="POCO M2 Pro";
+char sspass[]="Chandru@17";
+const int out=2;
+float humidity=0;
+float temperature=0;
+WiFiClient client;
+DHT dht(out,DHT11);
+unsigned long myChannelField=3091107;
+const int TemperatureField=1;
+const int HumidityField=2;
+const char* myWriteAPIKey="KYA0J9C2T71I66P2";
+
+
+
+
+
+void setup() {
+  ```
+
+  dht.begin();
+  Serial.begin(115200);
+  ThingSpeak.begin(client);
+  pinMode(out,INPUT);
+  
+
+
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(WiFi.status()!=WL_CONNECTED){
+    Serial.print("Attempting to connect to SSID:");
+    Serial.println(ssid);
+    while(WiFi.status()!=WL_CONNECTED)
+    {
+      WiFi.begin(ssid,sspass);
+      Serial.print(".");
+      delay(5000);
+    }
+    Serial.println("\nConnected");
+  }
+  temperature=dht.readTemperature();
+  humidity=dht.readHumidity();
+  Serial.print("Temperature:");
+  Serial.print(temperature);
+  Serial.println("℃");
+  Serial.print("Humidity:");
+  Serial.print(humidity);
+  Serial.println("%");
+  ThingSpeak.writeField(myChannelField,TemperatureField,temperature,myWriteAPIKey);
+  ThingSpeak.writeField(myChannelField,HumidityField,humidity,myWriteAPIKey);
+  delay(1000);
+
+}
+```
 
 # CIRCUIT DIAGRAM:
 
+![thingspeak ](https://github.com/user-attachments/assets/b8018e7b-1a03-4a04-9d9b-74def5582d63)
+
+
 # OUTPUT:
+
+<img width="1904" height="929" alt="Screenshot 2025-09-26 114655" src="https://github.com/user-attachments/assets/f79c125a-632a-49ea-b8d9-cbc218acfa16" />
+<img width="1910" height="992" alt="Screenshot 2025-09-26 114714" src="https://github.com/user-attachments/assets/7a7211c0-cbd7-4ecb-9d49-1ecf6cf8a734" />
+
+
 
 # RESULT:
 
