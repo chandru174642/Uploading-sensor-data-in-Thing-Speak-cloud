@@ -1,4 +1,6 @@
 # EXP 3:Uploading temperature sensor data in Thing Speak cloud
+NAME:CHANDRU.P
+REG NO:212223110007
 
 # AIM:
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
@@ -71,6 +73,7 @@ Automatically act on your data and communicate using third-party services like T
 
 
 # PROGRAM:
+```
 #include "ThingSpeak.h"
 #include <WiFi.h>
 #include "DHT.h"
@@ -91,7 +94,7 @@ const char* myWriteAPIKey="KYA0J9C2T71I66P2";
 
 
 void setup() {
-  ```
+  
 
   dht.begin();
   Serial.begin(115200);
