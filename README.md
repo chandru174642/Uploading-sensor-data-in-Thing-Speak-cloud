@@ -1,6 +1,6 @@
 # EXP 3:Uploading temperature sensor data in Thing Speak cloud
-NAME:CHANDRU.P
-REG NO:212223110007
+# NAME:CHANDRU.P
+# REG NO:212223110007
 
 # AIM:
 To monitor the temperature sensor data in the Thing speak using an ESP32 controller.
